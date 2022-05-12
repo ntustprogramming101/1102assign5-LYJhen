@@ -106,7 +106,7 @@ void initGame(){
 	initCabbages();
 
 	// Requirement #2: Initialize clocks and their position
-
+  initClocks();
 }
 
 void initPlayer(){
@@ -193,6 +193,13 @@ void initCabbages(){
 void initClocks(){
 	// Requirement #1: Complete this method based on initCabbages()
 	// - Remember to reroll if the randomized position has a cabbage on the same soil!
+  clockX = new float[6];
+  clockY = new float[6];
+
+  for(int i = 0; i < clockX.length; i++){
+    clockX[i] = SOIL_SIZE * floor(random(SOIL_COL_COUNT));
+    clockY[i] = SOIL_SIZE * ( i * 4 + floor(random(4)));
+  }
 }
 
 void draw() {
@@ -301,6 +308,21 @@ void draw() {
 
 		// Requirement #1: Clocks
 		// --- Requirement #3: Use boolean isHit(...) to detect clock <-> player collision
+    for(int i = 0; i < clockX.length; i++){
+
+      image(clock, clockX[i], clockY[i]);
+
+      // Requirement #3: Use boolean isHit(...) to detect collision
+      if(playerHealth < PLAYER_MAX_HEALTH
+      && clockX[i] + SOIL_SIZE > playerX    // r1 right edge past r2 left
+        && clockX[i] < playerX + SOIL_SIZE    // r1 left edge past r2 right
+        && clockY[i] + SOIL_SIZE > playerY    // r1 top edge past r2 bottom
+        && clockY[i] < playerY + SOIL_SIZE) { // r1 bottom edge past r2 top
+
+
+      }
+
+    }
 
 		// Groundhog
 
